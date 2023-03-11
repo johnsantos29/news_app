@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:oktoast/oktoast.dart';
+
+import './src/config/router/app_router.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,11 +12,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return OKToast(
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerDelegate: appRouter.delegate(),
+        routeInformationParser: appRouter.defaultRouteParser(),
       ),
     );
   }
