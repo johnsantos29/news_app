@@ -5,7 +5,7 @@ const String appTitle = 'News';
 const String baseUrl = 'https://newsapi.org/v2';
 
 // todo - put api key in secrets
-const String defaultApiKey = '';
+const String defaultApiKey = 'a402b4a306a74967baf67a2d511e8fa0';
 const String defaultSources = 'bbc-news, abc-news, al-jazeera-english';
 
 // Storage and Databases
