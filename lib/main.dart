@@ -3,9 +3,14 @@ import 'package:oktoast/oktoast.dart';
 
 import './src/config/router/app_router.dart';
 import 'src/config/themes/app_themes.dart';
+import 'src/locator.dart';
 import 'src/utils/constants/strings.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeDependencies();
+
   runApp(const MainApp());
 }
 
