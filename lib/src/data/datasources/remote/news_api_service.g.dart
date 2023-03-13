@@ -31,8 +31,8 @@ class _NewsApiService implements NewsApiService {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'apiKey': apiKey,
-      r'apiKey': country,
-      r'apiKey': category,
+      r'country': country,
+      r'category': category,
       r'page': page,
       r'pageSize': pageSize,
     };

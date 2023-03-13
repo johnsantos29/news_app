@@ -20,7 +20,7 @@ class _$AppRouter extends RootStackRouter {
     BreakingNewsViewRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
-        child: BreakingNewsView(),
+        child: const BreakingNewsView(),
       );
     }
   };
