@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/src/presentation/views/breaking_news_view.dart';
+import '../../presentation/views/breaking_news_view.dart';
 
 part 'app_router.gr.dart';
 
