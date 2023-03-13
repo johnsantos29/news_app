@@ -7,6 +7,7 @@ import 'package:ionicons/ionicons.dart';
 import '../../domain/models/article.dart';
 import '../../utils/extensions/scroll_controller.dart';
 import '../cubits/remote_articles/remote_articles_cubit.dart';
+import '../widgets/article_widget.dart';
 
 class BreakingNewsView extends HookWidget {
   const BreakingNewsView({Key? key}) : super(key: key);
