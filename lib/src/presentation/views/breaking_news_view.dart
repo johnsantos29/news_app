@@ -6,9 +6,9 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../config/router/app_router.dart';
 import '../../domain/models/article.dart';
-import '../../utils/extensions/scroll_controller.dart';
 import '../cubits/remote_articles/remote_articles_cubit.dart';
 import '../widgets/article_widget.dart';
+import '../../utils/extensions/scroll_controller.dart';
 
 class BreakingNewsView extends HookWidget {
   const BreakingNewsView({Key? key}) : super(key: key);
@@ -28,10 +28,20 @@ class BreakingNewsView extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: const Text(
-        'Daily News',
-        style: TextStyle(color: Colors.black),
-      )),
+        title: const Text(
+          'Daily News',
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () => appRouter.push(const SavedArticlesViewRoute()),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14),
+              child: Icon(Ionicons.bookmark, color: Colors.black),
+            ),
+          ),
+        ],
+      ),
       body: BlocBuilder<RemoteArticlesCubit, RemoteArticlesState>(
         builder: (_, state) {
           switch (state.runtimeType) {
@@ -40,7 +50,11 @@ class BreakingNewsView extends HookWidget {
             case RemoteArticlesFailed:
               return const Center(child: Icon(Ionicons.refresh));
             case RemoteArticlesSuccess:
-              return _buildArticles(scrollController, state.articles, state.noMoreData);
+              return _buildArticles(
+                scrollController,
+                state.articles,
+                state.noMoreData,
+              );
             default:
               return const SizedBox();
           }
@@ -49,18 +63,25 @@ class BreakingNewsView extends HookWidget {
     );
   }
 
-  Widget _buildArticles(ScrollController scrollController, List<Article> articles, bool noMoreData) {
+  Widget _buildArticles(
+    ScrollController scrollController,
+    List<Article> articles,
+    bool noMoreData,
+  ) {
     return CustomScrollView(
       controller: scrollController,
       slivers: [
         SliverList(
-            delegate: SliverChildBuilderDelegate(
-                (context, index) => ArticleWidget(
-                    article: articles[index],
-                    onArticlePressed: (e) => appRouter.push(
-                          ArticleDetailsViewRoute(article: e),
-                        )),
-                childCount: articles.length)),
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => ArticleWidget(
+              article: articles[index],
+              onArticlePressed: (e) => appRouter.push(
+                ArticleDetailsViewRoute(article: e),
+              ),
+            ),
+            childCount: articles.length,
+          ),
+        ),
         if (!noMoreData)
           const SliverToBoxAdapter(
             child: Padding(

@@ -33,6 +33,12 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    SavedArticlesViewRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const SavedArticlesView(),
+      );
+    },
   };
 
   @override
@@ -44,6 +50,10 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           ArticleDetailsViewRoute.name,
           path: '/article-details-view',
+        ),
+        RouteConfig(
+          SavedArticlesViewRoute.name,
+          path: '/saved-articles-view',
         ),
       ];
 }
@@ -93,4 +103,16 @@ class ArticleDetailsViewRouteArgs {
   String toString() {
     return 'ArticleDetailsViewRouteArgs{key: $key, article: $article}';
   }
+}
+
+/// generated route for
+/// [SavedArticlesView]
+class SavedArticlesViewRoute extends PageRouteInfo<void> {
+  const SavedArticlesViewRoute()
+      : super(
+          SavedArticlesViewRoute.name,
+          path: '/saved-articles-view',
+        );
+
+  static const String name = 'SavedArticlesViewRoute';
 }
