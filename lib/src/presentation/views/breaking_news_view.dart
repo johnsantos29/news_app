@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../../config/router/app_router.dart';
 import '../../domain/models/article.dart';
 import '../../utils/extensions/scroll_controller.dart';
 import '../cubits/remote_articles/remote_articles_cubit.dart';
@@ -53,7 +54,12 @@ class BreakingNewsView extends HookWidget {
       controller: scrollController,
       slivers: [
         SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) => ArticleWidget(article: articles[index]),
+            delegate: SliverChildBuilderDelegate(
+                (context, index) => ArticleWidget(
+                    article: articles[index],
+                    onArticlePressed: (e) => appRouter.push(
+                          ArticleDetailsViewRoute(article: e),
+                        )),
                 childCount: articles.length)),
         if (!noMoreData)
           const SliverToBoxAdapter(

@@ -22,7 +22,17 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: const BreakingNewsView(),
       );
-    }
+    },
+    ArticleDetailsViewRoute.name: (routeData) {
+      final args = routeData.argsAs<ArticleDetailsViewRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: ArticleDetailsView(
+          key: args.key,
+          article: args.article,
+        ),
+      );
+    },
   };
 
   @override
@@ -30,7 +40,11 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           BreakingNewsViewRoute.name,
           path: '/',
-        )
+        ),
+        RouteConfig(
+          ArticleDetailsViewRoute.name,
+          path: '/article-details-view',
+        ),
       ];
 }
 
@@ -44,4 +58,39 @@ class BreakingNewsViewRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'BreakingNewsViewRoute';
+}
+
+/// generated route for
+/// [ArticleDetailsView]
+class ArticleDetailsViewRoute
+    extends PageRouteInfo<ArticleDetailsViewRouteArgs> {
+  ArticleDetailsViewRoute({
+    Key? key,
+    required Article article,
+  }) : super(
+          ArticleDetailsViewRoute.name,
+          path: '/article-details-view',
+          args: ArticleDetailsViewRouteArgs(
+            key: key,
+            article: article,
+          ),
+        );
+
+  static const String name = 'ArticleDetailsViewRoute';
+}
+
+class ArticleDetailsViewRouteArgs {
+  const ArticleDetailsViewRouteArgs({
+    this.key,
+    required this.article,
+  });
+
+  final Key? key;
+
+  final Article article;
+
+  @override
+  String toString() {
+    return 'ArticleDetailsViewRouteArgs{key: $key, article: $article}';
+  }
 }
