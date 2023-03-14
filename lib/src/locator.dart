@@ -5,10 +5,19 @@ import 'package:get_it/get_it.dart';
 import './data/datasources/remote/news_api_service.dart';
 import './domain/repositories/api_repository.dart';
 import './data/repositories/api_repository_impl.dart';
+import 'data/datasources/local/app_database.dart';
+import 'data/repositories/database_repository_impl.dart';
+import 'domain/repositories/database_repository.dart';
+import 'utils/constants/strings.dart';
 
 final locator = GetIt.instance;
 
 Future<void> initializeDependencies() async {
+  final db = await $FloorAppDatabase.databaseBuilder(databaseName).build();
+  locator.registerSingleton<AppDatabase>(db);
+
+  locator.registerSingleton<DatabaseRepository>(DatabaseRepositoryImpl(locator<AppDatabase>()));
+
   final dio = Dio();
   dio.interceptors.add(AwesomeDioInterceptor());
 
